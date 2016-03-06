@@ -152,14 +152,6 @@ options. See the ConfigState documentation for more details.
 	Disables invocation of error and Stringer interface methods.
 	Method invocation is enabled by default.
 
-* DisablePointerMethods
-	Disables invocation of error and Stringer interface methods on types
-	which only accept pointer receivers from non-pointer variables.  This option
-	relies on access to the unsafe package, so it will not have any effect when
-	running in environments without access to the unsafe package such as Google
-	App Engine or with the "disableunsafe" build tag specified.
-	Pointer method invocation is enabled by default.
-
 * ContinueOnMethod
 	Enables recursion into types after invoking error and Stringer interface
 	methods. Recursion after method invocation is disabled by default.

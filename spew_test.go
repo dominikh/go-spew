@@ -127,7 +127,6 @@ func initSpewTests() {
 	// Config states with various settings.
 	scsDefault := spew.NewDefaultConfig()
 	scsNoMethods := &spew.ConfigState{Indent: " ", DisableMethods: true}
-	scsNoPmethods := &spew.ConfigState{Indent: " ", DisablePointerMethods: true}
 	scsMaxDepth := &spew.ConfigState{Indent: " ", MaxDepth: 1}
 	scsContinue := &spew.ConfigState{Indent: " ", ContinueOnMethod: true}
 
@@ -176,10 +175,6 @@ func initSpewTests() {
 		{scsNoMethods, fCSFprint, "", &ts, "<*>test"},
 		{scsNoMethods, fCSFprint, "", tps, "test"},
 		{scsNoMethods, fCSFprint, "", &tps, "<*>test"},
-		{scsNoPmethods, fCSFprint, "", ts, "stringer test"},
-		{scsNoPmethods, fCSFprint, "", &ts, "<*>stringer test"},
-		{scsNoPmethods, fCSFprint, "", tps, "test"},
-		{scsNoPmethods, fCSFprint, "", &tps, "<*>stringer test"},
 		{scsMaxDepth, fCSFprint, "", dt, "{{<max>} [<max>] [<max>] map[<max>]}"},
 		{scsMaxDepth, fCSFdump, "", dt, "(spew_test.depthTester) {\n" +
 			" ic: (spew_test.indirCir1) {\n  <max depth reached>\n },\n" +

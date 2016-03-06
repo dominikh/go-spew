@@ -53,20 +53,6 @@ type ConfigState struct {
 	// invoked for types that implement them.
 	DisableMethods bool
 
-	// DisablePointerMethods specifies whether or not to check for and invoke
-	// error and Stringer interfaces on types which only accept a pointer
-	// receiver when the current type is not a pointer.
-	//
-	// NOTE: This might be an unsafe action since calling one of these methods
-	// with a pointer receiver could technically mutate the value, however,
-	// in practice, types which choose to satisify an error or Stringer
-	// interface with a pointer receiver should not be mutating their state
-	// inside these interface methods.  As a result, this option relies on
-	// access to the unsafe package, so it will not have any effect when
-	// running in environments without access to the unsafe package such as
-	// Google App Engine or with the "disableunsafe" build tag specified.
-	DisablePointerMethods bool
-
 	// ContinueOnMethod specifies whether or not recursion should continue once
 	// a custom error or Stringer interface is invoked.  The default, false,
 	// means it will print the results of invoking the custom error or Stringer
@@ -74,7 +60,7 @@ type ConfigState struct {
 	// the internals of the data type.
 	//
 	// NOTE: This flag does not have any effect if method invocation is disabled
-	// via the DisableMethods or DisablePointerMethods options.
+	// via the DisableMethods option.
 	ContinueOnMethod bool
 
 	// SortKeys specifies map keys should be sorted before being printed. Use
@@ -289,7 +275,6 @@ func (c *ConfigState) convertArgs(args []interface{}) (formatters []interface{})
 // 	Indent: " "
 // 	MaxDepth: 0
 // 	DisableMethods: false
-// 	DisablePointerMethods: false
 // 	ContinueOnMethod: false
 // 	SortKeys: false
 func NewDefaultConfig() *ConfigState {
