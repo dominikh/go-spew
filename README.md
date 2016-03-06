@@ -180,15 +180,6 @@ options. See the ConfigState documentation for more details.
 
 ```
 
-## Unsafe Package Dependency
-
-This package relies on the unsafe package to perform some of the more advanced
-features, however it also supports a "limited" mode which allows it to work in
-environments where the unsafe package is not available.  By default, it will
-operate in this mode on Google App Engine.  The "disableunsafe" build tag may
-also be specified to force the package to build without using the unsafe
-package.
-
 ## License
 
 Go-spew is licensed under the liberal ISC License.

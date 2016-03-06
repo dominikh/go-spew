@@ -90,11 +90,7 @@ func handleMethods(cs *ConfigState, w io.Writer, v reflect.Value) (handled bool)
 	// to bypass these restrictions since this package does not mutate the
 	// values.
 	if !v.CanInterface() {
-		if UnsafeDisabled {
-			return false
-		}
-
-		v = unsafeReflectValue(v)
+		return false
 	}
 
 	// Choose whether or not to do error and Stringer interface lookups against
@@ -103,9 +99,6 @@ func handleMethods(cs *ConfigState, w io.Writer, v reflect.Value) (handled bool)
 	// mutate the value, however, types which choose to satisify an error or
 	// Stringer interface with a pointer receiver should not be mutating their
 	// state inside these interface methods.
-	if !cs.DisablePointerMethods && !UnsafeDisabled && !v.CanAddr() {
-		v = unsafeReflectValue(v)
-	}
 	if v.CanAddr() {
 		v = v.Addr()
 	}

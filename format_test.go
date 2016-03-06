@@ -532,9 +532,7 @@ func addArrayFormatterTests() {
 	v2t := "[3]spew_test.pstringer"
 	v2sp := "[stringer 1 stringer 2 stringer 3]"
 	v2s := v2sp
-	if spew.UnsafeDisabled {
-		v2s = "[1 2 3]"
-	}
+	v2s = "[1 2 3]"
 	addFormatterTest("%v", v2, v2s)
 	addFormatterTest("%v", pv2, "<*>"+v2sp)
 	addFormatterTest("%v", &pv2, "<**>"+v2sp)
@@ -807,9 +805,7 @@ func addMapFormatterTests() {
 	pv2Addr := fmt.Sprintf("%p", &pv2)
 	v2t := "map[spew_test.pstringer]spew_test.pstringer"
 	v2s := "map[stringer one:stringer 1]"
-	if spew.UnsafeDisabled {
-		v2s = "map[one:1]"
-	}
+	v2s = "map[one:1]"
 	addFormatterTest("%v", v2, v2s)
 	addFormatterTest("%v", pv2, "<*>"+v2s)
 	addFormatterTest("%v", &pv2, "<**>"+v2s)
@@ -972,14 +968,12 @@ func addStructFormatterTests() {
 	v3s2p := v3s2
 	v3s3 := "{s:(" + v3t2 + ")stringer test S:(" + v3t2 + ")stringer test2}"
 	v3s3p := v3s3
-	if spew.UnsafeDisabled {
-		v3s = "{test test2}"
-		v3sp = "{test stringer test2}"
-		v3s2 = "{s:test S:test2}"
-		v3s2p = "{s:test S:stringer test2}"
-		v3s3 = "{s:(" + v3t2 + ")test S:(" + v3t2 + ")test2}"
-		v3s3p = "{s:(" + v3t2 + ")test S:(" + v3t2 + ")stringer test2}"
-	}
+	v3s = "{test test2}"
+	v3sp = "{test stringer test2}"
+	v3s2 = "{s:test S:test2}"
+	v3s2p = "{s:test S:stringer test2}"
+	v3s3 = "{s:(" + v3t2 + ")test S:(" + v3t2 + ")test2}"
+	v3s3p = "{s:(" + v3t2 + ")test S:(" + v3t2 + ")stringer test2}"
 	addFormatterTest("%v", v3, v3s)
 	addFormatterTest("%v", pv3, "<*>"+v3sp)
 	addFormatterTest("%v", &pv3, "<**>"+v3sp)
@@ -1529,9 +1523,7 @@ func TestPrintSortedKeys(t *testing.T) {
 
 	s = cfg.Sprint(map[pstringer]int{pstringer("1"): 1, pstringer("3"): 3, pstringer("2"): 2})
 	expected = "map[stringer 1:1 stringer 2:2 stringer 3:3]"
-	if spew.UnsafeDisabled {
-		expected = "map[1:1 2:2 3:3]"
-	}
+	expected = "map[1:1 2:2 3:3]"
 	if s != expected {
 		t.Errorf("Sorted keys mismatch 3:\n  %v %v", s, expected)
 	}
@@ -1540,14 +1532,6 @@ func TestPrintSortedKeys(t *testing.T) {
 	expected = "map[ts.1:1 ts.2:2 ts.3:3]"
 	if s != expected {
 		t.Errorf("Sorted keys mismatch 4:\n  %v %v", s, expected)
-	}
-
-	if !spew.UnsafeDisabled {
-		s = cfg.Sprint(map[testStructP]int{testStructP{1}: 1, testStructP{3}: 3, testStructP{2}: 2})
-		expected = "map[ts.1:1 ts.2:2 ts.3:3]"
-		if s != expected {
-			t.Errorf("Sorted keys mismatch 5:\n  %v %v", s, expected)
-		}
 	}
 
 	s = cfg.Sprint(map[customError]int{customError(1): 1, customError(3): 3, customError(2): 2})
