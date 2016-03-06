@@ -67,7 +67,7 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/davecgh/go-spew/spew"
+	"honnef.co/go/spew"
 )
 
 // dumpTest is used to describe a test to be perfomed against the Dump method.

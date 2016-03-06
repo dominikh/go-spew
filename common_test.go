@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/davecgh/go-spew/spew"
+	"honnef.co/go/spew"
 )
 
 // custom type to test Stinger interface on non-pointer receiver.
