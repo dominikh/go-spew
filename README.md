@@ -97,7 +97,7 @@ func main() {
 ```
 (main.Foo) {
  unexportedField: (*main.Bar)(0xf84002e210)({
-  flag: (main.Flag) flagTwo,
+  flag: (main.Flag) 1,
   data: (uintptr) <nil>
  }),
  ExportedField: (map[interface {}]interface {}) {
@@ -147,14 +147,6 @@ options. See the ConfigState documentation for more details.
 * MaxDepth
 	Maximum number of levels to descend into nested data structures.
 	There is no limit by default.
-
-* DisableMethods
-	Disables invocation of error and Stringer interface methods.
-	Method invocation is enabled by default.
-
-* ContinueOnMethod
-	Enables recursion into types after invoking error and Stringer interface
-	methods. Recursion after method invocation is disabled by default.
 
 * SortKeys
 	Specifies map keys should be sorted before being printed. Use

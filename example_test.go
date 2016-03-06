@@ -107,7 +107,7 @@ func ExampleDump() {
 	//   (string) (len=3) "one": (bool) true
 	//  }
 	// }
-	// (spew_test.Flag) Unknown flag (5)
+	// (spew_test.Flag) 5
 	// ([]uint8) (len=34 cap=34) {
 	//  00000000  11 12 13 14 15 16 17 18  19 1a 1b 1c 1d 1e 1f 20  |............... |
 	//  00000010  21 22 23 24 25 26 27 28  29 2a 2b 2c 2d 2e 2f 30  |!"#$%&'()*+,-./0|
@@ -195,32 +195,4 @@ func ExampleConfigState_Dump() {
 	//  }
 	// }
 	//
-}
-
-// This example demonstrates how to use ConfigState.Printf to display a variable
-// with a format string and inline formatting.
-func ExampleConfigState_Printf() {
-	// See the top-level Dump example for details on the types used in this
-	// example.
-
-	// Create two ConfigState instances and modify the method handling of the
-	// first ConfigState only.
-	scs := spew.NewDefaultConfig()
-	scs2 := spew.NewDefaultConfig()
-	scs.DisableMethods = true
-
-	// Alternatively
-	// scs := spew.ConfigState{Indent: " ", DisableMethods: true}
-	// scs2 := spew.ConfigState{Indent: " "}
-
-	// This is of type Flag which implements a Stringer and has raw value 1.
-	f := flagTwo
-
-	// Dump using the ConfigState instances.
-	scs.Printf("f: %v\n", f)
-	scs2.Printf("f: %v\n", f)
-
-	// Output:
-	// f: 1
-	// f: flagTwo
 }

@@ -126,14 +126,7 @@ func redirStdout(f func()) ([]byte, error) {
 func initSpewTests() {
 	// Config states with various settings.
 	scsDefault := spew.NewDefaultConfig()
-	scsNoMethods := &spew.ConfigState{Indent: " ", DisableMethods: true}
 	scsMaxDepth := &spew.ConfigState{Indent: " ", MaxDepth: 1}
-	scsContinue := &spew.ConfigState{Indent: " ", ContinueOnMethod: true}
-
-	// Variables for tests on types which implement Stringer interface with and
-	// without a pointer receiver.
-	ts := stringer("test")
-	tps := pstringer("test")
 
 	// depthTester is used to test max depth handling for structs, array, slices
 	// and maps.
@@ -145,9 +138,6 @@ func initSpewTests() {
 	}
 	dt := depthTester{indirCir1{nil}, [1]string{"arr"}, []string{"slice"},
 		map[string]int{"one": 1}}
-
-	// Variable for tests on types which implement error interface.
-	te := customError(10)
 
 	spewTests = []spewTest{
 		{scsDefault, fCSFdump, "", int8(127), "(int8) 127\n"},
@@ -171,22 +161,12 @@ func initSpewTests() {
 		{scsDefault, fSprint, "", complex(-1, -2), "(-1-2i)"},
 		{scsDefault, fSprintf, "%v", complex(float32(-3), -4), "(-3-4i)"},
 		{scsDefault, fSprintln, "", complex(float64(-5), -6), "(-5-6i)\n"},
-		{scsNoMethods, fCSFprint, "", ts, "test"},
-		{scsNoMethods, fCSFprint, "", &ts, "<*>test"},
-		{scsNoMethods, fCSFprint, "", tps, "test"},
-		{scsNoMethods, fCSFprint, "", &tps, "<*>test"},
 		{scsMaxDepth, fCSFprint, "", dt, "{{<max>} [<max>] [<max>] map[<max>]}"},
 		{scsMaxDepth, fCSFdump, "", dt, "(spew_test.depthTester) {\n" +
 			" ic: (spew_test.indirCir1) {\n  <max depth reached>\n },\n" +
 			" arr: ([1]string) (len=1 cap=1) {\n  <max depth reached>\n },\n" +
 			" slice: ([]string) (len=1 cap=1) {\n  <max depth reached>\n },\n" +
 			" m: (map[string]int) (len=1) {\n  <max depth reached>\n }\n}\n"},
-		{scsContinue, fCSFprint, "", ts, "(stringer test) test"},
-		{scsContinue, fCSFdump, "", ts, "(spew_test.stringer) " +
-			"(len=4) (stringer test) \"test\"\n"},
-		{scsContinue, fCSFprint, "", te, "(error: 10) 10"},
-		{scsContinue, fCSFdump, "", te, "(spew_test.customError) " +
-			"(error: 10) 10\n"},
 	}
 }
 

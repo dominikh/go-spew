@@ -49,20 +49,6 @@ type ConfigState struct {
 	// nested data structures.
 	MaxDepth int
 
-	// DisableMethods specifies whether or not error and Stringer interfaces are
-	// invoked for types that implement them.
-	DisableMethods bool
-
-	// ContinueOnMethod specifies whether or not recursion should continue once
-	// a custom error or Stringer interface is invoked.  The default, false,
-	// means it will print the results of invoking the custom error or Stringer
-	// interface and return immediately instead of continuing to recurse into
-	// the internals of the data type.
-	//
-	// NOTE: This flag does not have any effect if method invocation is disabled
-	// via the DisableMethods option.
-	ContinueOnMethod bool
-
 	// SortKeys specifies map keys should be sorted before being printed. Use
 	// this to have a more deterministic, diffable output.  Note that only
 	// native types (bool, int, uint, floats, uintptr and string) and types
@@ -274,8 +260,6 @@ func (c *ConfigState) convertArgs(args []interface{}) (formatters []interface{})
 //
 // 	Indent: " "
 // 	MaxDepth: 0
-// 	DisableMethods: false
-// 	ContinueOnMethod: false
 // 	SortKeys: false
 func NewDefaultConfig() *ConfigState {
 	return &ConfigState{Indent: " "}

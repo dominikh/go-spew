@@ -82,14 +82,6 @@ The following configuration options are available:
 		Maximum number of levels to descend into nested data structures.
 		There is no limit by default.
 
-	* DisableMethods
-		Disables invocation of error and Stringer interface methods.
-		Method invocation is enabled by default.
-
-	* ContinueOnMethod
-		Enables recursion into types after invoking error and Stringer interface
-		methods. Recursion after method invocation is disabled by default.
-
 	* SortKeys
 		Specifies map keys should be sorted before being printed. Use
 		this to have a more deterministic, diffable output.  Note that
