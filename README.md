@@ -1,6 +1,9 @@
 go-spew
 =======
 
+**Note: this is a fork of go-spew, removing all uses of `unsafe` and
+  some options. It's more opinionated and geared towards my needs.**
+
 [![Build Status](https://travis-ci.org/davecgh/go-spew.png?branch=master)]
 (https://travis-ci.org/davecgh/go-spew) [![Coverage Status]
 (https://coveralls.io/repos/davecgh/go-spew/badge.png?branch=master)]
